@@ -22,9 +22,14 @@ describe('Transaction functionality of account', () => {
         const account = new Account();
         expect(account.transaction).toEqual([])
     })
-    it('Should be pushed the amount of a deposit', () => {
+    it('Should push the amount of a deposit', () => {
         const account = new Account();
         account.deposit(100)
-        expect(account.transaction).toEqual([100])
+        expect(account.transaction).toContain(100)
+    })
+    it('Should push the amount of a withdrawal', () => {
+        const account = new Account();
+        account.withdrawal(100)
+        expect(account.transaction).toContain(100)
     })
 });

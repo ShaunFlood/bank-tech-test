@@ -13,6 +13,7 @@ class BankAccount {
     }
     withdrawal(num) {
         this.balance -= num
+        this.transaction.push(num);
         return this.balance
     }
 }
