@@ -8,6 +8,7 @@ class BankAccount {
         }
     deposit(num) {
         this.balance += num
+        this.transaction.push(num);
         return this.balance
     }
     withdrawal(num) {
