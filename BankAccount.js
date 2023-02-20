@@ -8,7 +8,7 @@ class BankAccount {
         }
     deposit(num) {
         this.balance += num
-        this.transaction.push({num: num, date: new Date().toLocaleDateString()});
+        this.transaction.push({credit: num, date: new Date().toLocaleDateString()});
         return this.balance
     }
     withdrawal(num) {
