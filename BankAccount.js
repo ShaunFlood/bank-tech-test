@@ -11,9 +11,9 @@ class BankAccount {
         this.transaction.push(num, date);
         return this.balance
     }
-    withdrawal(num) {
+    withdrawal(num, date) {
         this.balance -= num
-        this.transaction.push(num);
+        this.transaction.push(num, date);
         return this.balance
     }
 }
