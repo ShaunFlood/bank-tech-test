@@ -25,27 +25,23 @@ describe('Transaction functionality of account', () => {
     it('Should push the amount of a deposit', () => {
         const account = new Account();
         account.deposit(100)
-        expect(account.transaction).toContain(100)
+        expect(account.transaction.map(t => t.num)).toContain(100)
     })
     it('Should push the amount of a withdrawal', () => {
         const account = new Account();
         account.withdrawal(100)
-        expect(account.transaction).toContain(100)
+        expect(account.transaction.map(t => t.num)).toContain(100)
     })
     it('Should push the date in to the transcation from deposit', () => {
         const account = new Account();
         account.deposit(100)
-        expect(account.transaction).toContain(100)
-        expect(account.transaction).toContain('2/20/2023')
+        expect(account.transaction.map(t => t.num)).toContain(100)
+        expect(account.transaction.map(t => t.date)).toContain('2/20/2023')
     })
     it('Should push the date in to the transaction from withdrawal', () => {
         const account = new Account();
         account.withdrawal(50)
-        expect(account.transaction).toContain(50)
-        expect(account.transaction).toContain('2/20/2023')
-    })
-    xit('', () => {
-        const account = new Account();
-        account.withdrawal(50, '14/01/2022')
+        expect(account.transaction.map(t => t.num)).toContain(50)
+        expect(account.transaction.map(t => t.date)).toContain('2/20/2023')
     })
 });
