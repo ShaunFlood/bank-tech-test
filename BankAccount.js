@@ -6,14 +6,14 @@ class BankAccount {
     getBalance() {
         return this.balance;
         }
-    deposit(num, date) {
+    deposit(num) {
         this.balance += num
-        this.transaction.push(num, date);
+        this.transaction.push(num, new Date().toLocaleDateString());
         return this.balance
     }
-    withdrawal(num, date) {
+    withdrawal(num) {
         this.balance -= num
-        this.transaction.push(num, date);
+        this.transaction.push(num, new Date().toLocaleDateString())
         return this.balance
     }
 }

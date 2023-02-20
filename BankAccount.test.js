@@ -34,14 +34,18 @@ describe('Transaction functionality of account', () => {
     })
     it('Should push the date in to the transcation from deposit', () => {
         const account = new Account();
-        account.deposit(100, '13/01/2022')
+        account.deposit(100)
         expect(account.transaction).toContain(100)
-        expect(account.transaction).toContain('13/01/2022')
+        expect(account.transaction).toContain('2/20/2023')
     })
     it('Should push the date in to the transaction from withdrawal', () => {
         const account = new Account();
-        account.withdrawal(50, '14/01/2022')
+        account.withdrawal(50)
         expect(account.transaction).toContain(50)
-        expect(account.transaction).toContain('14/01/2022')
+        expect(account.transaction).toContain('2/20/2023')
+    })
+    xit('', () => {
+        const account = new Account();
+        account.withdrawal(50, '14/01/2022')
     })
 });
