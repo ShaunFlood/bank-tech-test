@@ -45,4 +45,9 @@ describe('Transaction functionality of account', () => {
         expect(account.transaction.map(t => t.date)).toContain('2/20/2023')
 
     })
+    it('Should return null for debt when a deposit is made', () => {
+        const account = new Account();
+        account.withdrawal(50)
+        expect(account.transaction.map(t => t.credit)).toEqual([null])
+    })
 });
