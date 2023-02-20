@@ -13,7 +13,7 @@ class BankAccount {
     }
     withdrawal(num) {
         this.balance -= num
-        this.transaction.push({num, date: new Date().toLocaleDateString()})
+        this.transaction.push({debt: num, date: new Date().toLocaleDateString()})
         return this.balance
     }
 }
