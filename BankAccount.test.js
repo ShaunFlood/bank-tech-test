@@ -10,4 +10,10 @@ describe('Balance functionality of account', () => {
         account.deposit(50);
         expect(account.getBalance()).toBe(50)
     })
+    it('Should subtract money to the balance once a withdrawl is made', () => {
+        const account = new Account();
+        account.deposit(100)
+        account.withdrawal(50)
+        expect(account.getBalance()).toBe(50)
+    })
   });
