@@ -6,9 +6,9 @@ class BankAccount {
     getBalance() {
         return this.balance;
         }
-    deposit(num) {
+    deposit(num, date) {
         this.balance += num
-        this.transaction.push(num);
+        this.transaction.push(num, date);
         return this.balance
     }
     withdrawal(num) {

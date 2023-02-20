@@ -32,4 +32,10 @@ describe('Transaction functionality of account', () => {
         account.withdrawal(100)
         expect(account.transaction).toContain(100)
     })
+    it('Should push the date in to the transcation from deposit', () => {
+        const account = new Account();
+        account.deposit(100, '13/01/2022')
+        expect(account.transaction).toContain(100)
+        expect(account.transaction).toContain('13/01/2022')
+    })
 });
