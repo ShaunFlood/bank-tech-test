@@ -1,6 +1,7 @@
 class BankAccount {
     constructor() {
         this.balance = 0 
+        this.transaction = []
         }
     getBalance() {
         return this.balance;

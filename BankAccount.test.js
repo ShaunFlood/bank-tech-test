@@ -16,4 +16,10 @@ describe('Balance functionality of account', () => {
         account.withdrawal(50)
         expect(account.getBalance()).toBe(50)
     })
-  });
+});
+describe('Transaction functionality of account', () => {
+    it('Should display an empty array', () => {
+        const account = new Account();
+        expect(account.transaction).toEqual([])
+    })
+});
