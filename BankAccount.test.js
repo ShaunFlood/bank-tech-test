@@ -36,14 +36,29 @@ describe('Transaction functionality of account', () => {
         const account = new Account();
         account.deposit(100)
         expect(account.transaction.map(t => t.credit)).toContain(100)
-        expect(account.transaction.map(t => t.date)).toContain('2/20/2023')
+        expect(account.transaction.map(t => t.date)).toContain('2/21/2023')
     })
     it('Should push the date in to the transaction from withdrawal', () => {
         const account = new Account();
         account.withdrawal(50)
         expect(account.transaction.map(t => t.debt)).toContain(50)
-        expect(account.transaction.map(t => t.date)).toContain('2/20/2023')
+        expect(account.transaction.map(t => t.date)).toContain('2/21/2023')
 
+    })
+    it('Should push a balance in from a withdrawal', () => {
+        const account = new Account();
+        account.deposit(100)
+        account.withdrawal(50)
+        expect(account.transaction.map(t => t.debt)).toContain(50)
+        expect(account.transaction.map(t => t.date)).toContain('2/21/2023')
+        expect(account.transaction.map(t => t.balance)).toContain(50)
+    })
+    it('Should push a balance in from a deposit', () => {
+        const account = new Account();
+        account.deposit(1000)
+        expect(account.transaction.map(t => t.credit)).toContain(1000)
+        expect(account.transaction.map(t => t.date)).toContain('2/21/2023')
+        expect(account.transaction.map(t => t.balance)).toContain(1000)
     })
     it('Should return null for credit when a withdrawal is made', () => {
         const account = new Account();
@@ -56,3 +71,21 @@ describe('Transaction functionality of account', () => {
         expect(account.transaction.map(t => t.debt)).toEqual([null])
     })
 });
+describe('Statement functionality of account', () => {
+    it('Should display an header', () => {
+        const account = new Account();
+        const logSpy = jest.spyOn(console, 'log').mockImplementation(); //this lets us spy on the console log
+        account.print();
+        expect(logSpy).toHaveBeenCalledWith('date || credit || debit || balance');
+    }) 
+    it('Should display the information from a deposit and withdrawal', () => {
+        const account = new Account();
+        const logSpy = jest.spyOn(console, 'log').mockImplementation(); //this lets us spy on the console log
+        account.deposit(1000)
+        account.withdrawal(200)
+        account.print();
+        expect(logSpy).toHaveBeenCalledWith('date || credit || debit || balance');
+        expect(logSpy).toHaveBeenCalledWith('2/21/2023 || 1000 || null || 1000');
+        expect(logSpy).toHaveBeenCalledWith('2/21/2023 || null || 200 || 800');
+    })
+})
