@@ -75,16 +75,35 @@ describe('Statement functionality of account', () => {
     it('Should display an header', () => {
         const account = new Account();
         const logSpy = jest.spyOn(console, 'log').mockImplementation(); //this lets us spy on the console log
-        account.print();
+        account.statement();
         expect(logSpy).toHaveBeenCalledWith('date || credit || debit || balance');
     }) 
     it('Should display the information with demicals for pence from a deposit and empty for debt instead of null', () => {
         const account = new Account();
         const logSpy = jest.spyOn(console, 'log').mockImplementation(); //this lets us spy on the console log
         account.deposit(1000)
-        account.print();
+        account.statement();
         expect(logSpy).toHaveBeenCalledWith('date || credit || debit || balance');
         expect(logSpy).toHaveBeenCalledWith('2/21/2023 || 1000.00 ||  || 1000.00');
     })
-    
+    it('Should display the information with demicals for pence from a withdrwal and empty for debt instead of null', () => {
+        const account = new Account();
+        const logSpy = jest.spyOn(console, 'log').mockImplementation(); //this lets us spy on the console log
+        account.withdrawal(200)
+        account.statement();
+        expect(logSpy).toHaveBeenCalledWith('date || credit || debit || balance');
+        expect(logSpy).toHaveBeenCalledWith('2/21/2023 ||  || 200.00 || -200.00');
+    })
+    it('Should display both information from withdrwals and deposits', () => {
+        const account = new Account();
+        const logSpy = jest.spyOn(console, 'log').mockImplementation(); //this lets us spy on the console log
+        account.deposit(1000)
+        account.deposit(2000)
+        account.withdrawal(500);
+        account.statement()
+        expect(logSpy).toHaveBeenCalledWith('date || credit || debit || balance');
+        expect(logSpy).toHaveBeenCalledWith('2/21/2023 || 1000.00 ||  || 1000.00');
+        expect(logSpy).toHaveBeenCalledWith('2/21/2023 || 2000.00 ||  || 3000.00');
+        expect(logSpy).toHaveBeenCalledWith('2/21/2023 ||  || 500.00 || 2500.00');
+    })
 })

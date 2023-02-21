@@ -16,7 +16,7 @@ class BankAccount {
         this.transaction.push({debt: num, credit: null, date: new Date().toLocaleDateString(), balance: this.balance})
         return this.balance
     }
-    print(){
+    statement(){
         const header = "date || credit || debit || balance";
         console.log(header)
         this.transaction.forEach(({ credit, debt, date, balance }) => {
