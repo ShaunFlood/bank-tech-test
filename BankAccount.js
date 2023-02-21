@@ -20,13 +20,9 @@ class BankAccount {
         const header = "date || credit || debit || balance";
         console.log(header)
         this.transaction.forEach(({ credit, debt, date, balance }) => {
-            const transactionString = `${date} || ${credit} || ${debt} || ${balance}`;
+            const transactionString = `${date} || ${credit ? credit.toFixed(2) : ''} || ${debt ? debt.toFixed(2) : ''} || ${balance.toFixed(2)}`;
             console.log(transactionString)
         })
-        //spilt || this and show each one seperatly
-        // then we need to print out each thing which is seperated with '||'
-        // print out the header
-        // 
     }
 }
 

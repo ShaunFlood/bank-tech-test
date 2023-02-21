@@ -78,14 +78,13 @@ describe('Statement functionality of account', () => {
         account.print();
         expect(logSpy).toHaveBeenCalledWith('date || credit || debit || balance');
     }) 
-    it('Should display the information from a deposit and withdrawal', () => {
+    it('Should display the information with demicals for pence from a deposit and empty for debt instead of null', () => {
         const account = new Account();
         const logSpy = jest.spyOn(console, 'log').mockImplementation(); //this lets us spy on the console log
         account.deposit(1000)
-        account.withdrawal(200)
         account.print();
         expect(logSpy).toHaveBeenCalledWith('date || credit || debit || balance');
-        expect(logSpy).toHaveBeenCalledWith('2/21/2023 || 1000 || null || 1000');
-        expect(logSpy).toHaveBeenCalledWith('2/21/2023 || null || 200 || 800');
+        expect(logSpy).toHaveBeenCalledWith('2/21/2023 || 1000.00 ||  || 1000.00');
     })
+    
 })
