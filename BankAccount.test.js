@@ -36,13 +36,13 @@ describe('Transaction functionality of account', () => {
         const account = new Account();
         account.deposit(100)
         expect(account.transaction.map(t => t.credit)).toContain(100)
-        expect(account.transaction.map(t => t.date)).toContain('2/21/2023')
+        expect(account.transaction.map(t => t.date)).toContain(new Date().toLocaleDateString())
     })
     it('Should push the date in to the transaction from withdrawal', () => {
         const account = new Account();
         account.withdrawal(50)
         expect(account.transaction.map(t => t.debt)).toContain(50)
-        expect(account.transaction.map(t => t.date)).toContain('2/21/2023')
+        expect(account.transaction.map(t => t.date)).toContain(new Date().toLocaleDateString())
 
     })
     it('Should push a balance in from a withdrawal', () => {
@@ -50,14 +50,14 @@ describe('Transaction functionality of account', () => {
         account.deposit(100)
         account.withdrawal(50)
         expect(account.transaction.map(t => t.debt)).toContain(50)
-        expect(account.transaction.map(t => t.date)).toContain('2/21/2023')
+        expect(account.transaction.map(t => t.date)).toContain(new Date().toLocaleDateString())
         expect(account.transaction.map(t => t.balance)).toContain(50)
     })
     it('Should push a balance in from a deposit', () => {
         const account = new Account();
         account.deposit(1000)
         expect(account.transaction.map(t => t.credit)).toContain(1000)
-        expect(account.transaction.map(t => t.date)).toContain('2/21/2023')
+        expect(account.transaction.map(t => t.date)).toContain(new Date().toLocaleDateString())
         expect(account.transaction.map(t => t.balance)).toContain(1000)
     })
     it('Should return null for credit when a withdrawal is made', () => {
@@ -84,7 +84,7 @@ describe('Statement functionality of account', () => {
         account.deposit(1000)
         account.statement();
         expect(logSpy).toHaveBeenCalledWith('date || credit || debit || balance');
-        expect(logSpy).toHaveBeenCalledWith('2/21/2023 || 1000.00 ||  || 1000.00');
+        expect(logSpy).toHaveBeenCalledWith(`${new Date().toLocaleDateString()} || 1000.00 ||  || 1000.00`);
     })
     it('Should display the information with demicals for pence from a withdrwal and empty for debt instead of null', () => {
         const account = new Account();
@@ -92,7 +92,7 @@ describe('Statement functionality of account', () => {
         account.withdrawal(200)
         account.statement();
         expect(logSpy).toHaveBeenCalledWith('date || credit || debit || balance');
-        expect(logSpy).toHaveBeenCalledWith('2/21/2023 ||  || 200.00 || -200.00');
+        expect(logSpy).toHaveBeenCalledWith(`${new Date().toLocaleDateString()} ||  || 200.00 || -200.00`);
     })
     it('Should display both information from withdrwals and deposits', () => {
         const account = new Account();
@@ -102,8 +102,8 @@ describe('Statement functionality of account', () => {
         account.withdrawal(500);
         account.statement()
         expect(logSpy).toHaveBeenCalledWith('date || credit || debit || balance');
-        expect(logSpy).toHaveBeenCalledWith('2/21/2023 || 1000.00 ||  || 1000.00');
-        expect(logSpy).toHaveBeenCalledWith('2/21/2023 || 2000.00 ||  || 3000.00');
-        expect(logSpy).toHaveBeenCalledWith('2/21/2023 ||  || 500.00 || 2500.00');
+        expect(logSpy).toHaveBeenCalledWith(`${new Date().toLocaleDateString()} || 1000.00 ||  || 1000.00`);
+        expect(logSpy).toHaveBeenCalledWith(`${new Date().toLocaleDateString()} || 2000.00 ||  || 3000.00`);
+        expect(logSpy).toHaveBeenCalledWith(`${new Date().toLocaleDateString()} ||  || 500.00 || 2500.00`);
     })
 })
